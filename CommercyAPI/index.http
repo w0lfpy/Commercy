@@ -1,0 +1,136 @@
+// COMERCIOS API //
+GET http://localhost:3000/api/comercios HTTP/1.1
+###
+GET http://localhost:3000/api/comercios/?ordenar=asc HTTP/1.1
+###
+GET http://localhost:3000/api/comercios/?ordenar=desc HTTP/1.1
+
+###
+GET http://localhost:3000/api/comercios/J140900 HTTP/1.1
+
+###
+POST http://localhost:3000/api/comercios HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre": "Comercio 160",
+    "cif": "A1234",
+    "direccion": "Direccion 160",
+    "email": "comercio160@gmail.com",
+    "telefono": "1234567890",
+    "id": 6
+}
+
+###
+PUT http://localhost:3000/api/comercios/671168cc0096a7551bdb11e0/A1234 HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre": "Comercio 14",
+    "cif": "J1409001922",
+    "direccion": "Direccion 14",
+    "telefono": "987654321",
+    "email": "comercio14@gmail.com"
+}
+
+###
+DELETE http://localhost:3000/api/comercios/J1409001922 HTTP/1.1
+
+
+
+# WEB API
+###
+GET http://localhost:3000/api/web HTTP/1.1
+
+###
+GET http://localhost:3000/api/web/670f77f144d34eb9b17f4947 HTTP/1.1
+
+###
+POST http://localhost:3000/api/web HTTP/1.1
+Content-Type: application/json
+
+{
+    "ciudad": "Barcelona",
+    "actividad": "Restaurante",
+    "titulo": "Restaurante 1",
+    "resumen": "Resumen 1",
+    "textos": ["Texto 1", "Texto 2"],
+    "imagenes": [],
+    "reseñas": {
+        "scoring": 3,
+        "puntuacion": 5,
+        "texto": "Reseña 1"
+    }
+}
+
+###
+PUT http://localhost:3000/api/web/6711694a0096a7551bdb11ea HTTP/1.1
+Content-Type: application/json
+
+{
+    "ciudad": "Málaga",
+    "actividad": "Tienda Animales",
+    "resumen": "Resumen 4",
+    "textos": ["Texto 6", "Texto 9"]
+}
+
+###
+DELETE http://localhost:3000/api/web/6711694a0096a7551bdb11ea HTTP/1.1
+
+###
+DELETE http://localhost:3000/api/web/671169a70096a7551bdb11f3?soft=True HTTP/1.1
+
+###
+PATCH http://localhost:3000/api/web/6711694a0096a7551bdb11ea/upload-image HTTP/1.1
+Content-Type: multipart/form-data; boundary=Boundary
+
+--Boundary
+Content-Disposition: form-data; name="image"; filename="img.jpg"
+Content-Type: image/jpeg
+
+< ./img.jpg
+--Boundary--
+
+### 
+GET http://localhost:3000/uploads/img.jpg 
+
+// AUTH //
+###
+POST http://localhost:3000/api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Juan Rodriguez",
+    "age" : 15,
+    "email": "juan2219@gmail.com",
+    "password": "123456789A",
+    "ciudad": "Granada",
+    "intereses": ["locooos Motos", "Tienda Animales"],
+    "ofertas": true,
+    "role": "admin"
+}
+
+###
+POST http://localhost:3000/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "juan2219@gmail.com",
+    "password": "123456789A"
+}
+
+###
+PUT http://localhost:3000/api/auth/updateUser/6713f7653f2e11efc17de8ca HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzEzZjc2NTNmMmUxMWVmYzE3ZGU4Y2EiLCJyb2xlIjpbImFkbWluIl0sImlhdCI6MTcyOTM2MTc3MSwiZXhwIjoxNzI5NDMzNzcxfQ.wzrcXH98zQlZlzHsjc-dizkzsCayVeL_xtWDWk-kuO0
+Content-Type: application/json
+
+{
+    "name": "Margarita Perez",
+    "age" : 15,
+    "email": "margarita1409@gmail.com",
+    "password": "123456789A"
+}
+
+###
+DELETE http://localhost:3000/api/auth/deleteUser/6713f7653f2e11efc17de8ca HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzEzZjc2NTNmMmUxMWVmYzE3ZGU4Y2EiLCJyb2xlIjpbImFkbWluIl0sImlhdCI6MTcyOTM2MTc3MSwiZXhwIjoxNzI5NDMzNzcxfQ.wzrcXH98zQlZlzHsjc-dizkzsCayVeL_xtWDWk-kuO0
