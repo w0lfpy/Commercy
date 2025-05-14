@@ -12,17 +12,17 @@ const swaggerSpecs = require('./docs/swagger');
 dbConnect();
 const app = express();
 
-// Configuro la aplicación para que pueda enviar mensajes a Slack
-morganBody(app, {
-    noColors: true, //limpiamos el String de datos lo máximo posible antes de mandarlo a Slack
+// // Configuro la aplicación para que pueda enviar mensajes a Slack
+// morganBody(app, {
+//     noColors: true, //limpiamos el String de datos lo máximo posible antes de mandarlo a Slack
   
-    skip: function (req, res) {
-      //Solo enviamos errores (4XX de cliente y 5XX de servidor)
-      return res.statusCode < 400;
-    },
+//     skip: function (req, res) {
+//       //Solo enviamos errores (4XX de cliente y 5XX de servidor)
+//       return res.statusCode < 400;
+//     },
   
-    stream: loggerStream(process.env.SLACK_WEBHOOK),
-});
+//     stream: loggerStream(process.env.SLACK_WEBHOOK),
+// });
 
 app.use(cors());
 // Configuro la aplicación para que pueda recibir datos en formato JSON
