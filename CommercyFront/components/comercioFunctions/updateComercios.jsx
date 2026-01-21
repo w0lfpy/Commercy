@@ -42,7 +42,7 @@ export default function UpdateCommerce({ commerceData }) {
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             const response = await axios.put(
-                `http://localhost:3000/api/comercios/${commerceData._id}/${commerceData.cif}`, 
+                `${process.env.NEXT_PUBLIC_API_URL}/api/comercios/${commerceData._id}/${commerceData.cif}`, 
                 data
             );
             console.log("Commerce updated:", response.data);

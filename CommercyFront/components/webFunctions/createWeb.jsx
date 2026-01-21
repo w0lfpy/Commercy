@@ -28,7 +28,7 @@ export default function CreateWeb() {
             }
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-            const response = await axios.post("http://localhost:3000/api/web", values); 
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/web`, values); 
             setWebToken(response.data.token);
             console.log("Web created successfully:", response.data.web);
             localStorage.setItem("web", JSON.stringify(values));

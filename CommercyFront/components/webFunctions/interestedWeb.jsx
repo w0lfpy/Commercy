@@ -20,7 +20,7 @@ export default function InterestedWeb() {
             }
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${commerceToken}`;
-            const response = await axios.get(`http://localhost:3000/api/web/userInterested/${commerceCif}`); 
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/web/userInterested/${commerceCif}`); 
 
             if (response.data.error) {
                 setError(response.data.error);

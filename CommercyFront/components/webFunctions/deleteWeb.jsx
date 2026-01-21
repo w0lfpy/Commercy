@@ -23,7 +23,7 @@ export default function DeleteWeb() {
             axios.defaults.headers.common["Authorization"] = `Bearer ${commerceToken}`;
             console.log(`Deleting web with CIF: ${commerceCif}, Soft Delete: ${isSoftDelete}`);
             const response = await axios.delete(
-                `http://localhost:3000/api/web/${commerceCif}?soft=${isSoftDelete ? "True" : "False"}` 
+                `${process.env.NEXT_PUBLIC_API_URL}/api/web/${commerceCif}?soft=${isSoftDelete ? "True" : "False"}` 
             );
 
             if (response.data.error) {

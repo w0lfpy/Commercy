@@ -17,7 +17,7 @@ export default function GetComercios({ onSelectCommerce }) {
             }
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-            const response = await axios.get("http://localhost:3000/api/comercios"); 
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/comercios`); 
             setComercios(response.data);
             setError(null);
         } catch (err) {

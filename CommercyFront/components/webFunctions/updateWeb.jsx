@@ -34,7 +34,7 @@ export default function UpdateWeb() {
             }
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${commerceToken}`;
-            const response = await axios.put(`http://localhost:3000/api/web/${commerceCif}`, data); 
+            const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/web/${commerceCif}`, data); 
 
             if (response.data.error) {
                 setErrors({ submit: response.data.error });

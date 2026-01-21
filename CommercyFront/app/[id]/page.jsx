@@ -5,7 +5,7 @@ import {WebDetails} from "@/components";
 export default async function WebDetailsPage({ params }) {
   const {id} = params;
 
-  const res = await fetch(`http://localhost:3000/api/web/${id}`, { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/web/${id}`, { cache: 'no-store' });
   const data = await res.json();
 
   if (!data || res.status !== 200) {

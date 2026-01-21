@@ -54,7 +54,7 @@ export default function UploadImg() {
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${commerceToken}`;
             const response = await axios.patch(
-                `http://localhost:3000/api/web/${commerceCif}/upload-image`, 
+                `${process.env.NEXT_PUBLIC_API_URL}/api/web/${commerceCif}/upload-image`, 
                 formData
             );
 

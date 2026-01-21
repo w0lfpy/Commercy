@@ -39,7 +39,7 @@ export default function UpdateUserInfo() {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         const decodeToken = jwtDecode(token);
         const userId = decodeToken._id;
-        const response = await axios.put(`http://localhost:3000/api/user/updateUser/${userId}`, data);
+        const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/user/updateUser/${userId}`, data);
         console.log(response);
         if (response.data.error) {
           setErrors({ submit: response.data.error });

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function WebItem({ web }) {
   const firstImage = Array.isArray(web.imagenes)
-    ? 'http://localhost:3000' + web.imagenes[0]
+    ? `${process.env.NEXT_PUBLIC_API_URL}` + web.imagenes[0]
     : 'https://via.placeholder.com/150';
 
   const titulo = web.titulo

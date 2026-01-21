@@ -51,21 +51,36 @@ cd ../CommercyFront
 npm install --legacy-peer-deps
 ```
 
-## Configuración
+## Configuracion
 
-### Variables de entorno para la API
+### Variables de entorno (backend y frontend)
+
+#### Backend (CommercyAPI/.env)
 
 Crea un archivo `.env` en la carpeta `CommercyAPI/` con el siguiente contenido:
 
 ```
-DB_URI="LINK A TU BASE DE DATOS MONGODB"
+DB_URI=mongodb+srv://usuario:password@host/tu_db
 JWT_SECRET=un_secreto_seguro
-SLACK_WEBHOOK="LINK PARA MENSAJES DE SLACK"
-PORT=3000
+PORT=8000
 ```
 
-- Cambia los valores según tu entorno.
-- Si no usas Slack, puedes dejar `SLACK_WEBHOOK` vacío.
+- `DB_URI` es obligatorio para la conexion con MongoDB.
+- `JWT_SECRET` es obligatorio para firmar tokens.
+- `PORT` es el puerto del backend (por defecto 3000 si no se define).
+- `SLACK_WEBHOOK` es opcional; el envio a Slack esta comentado en `CommercyAPI/app.js`.
+
+#### Frontend (CommercyFront/.env.local)
+
+Crea un archivo `.env.local` en la carpeta `CommercyFront/` con el siguiente contenido:
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+- `NEXT_PUBLIC_API_URL` deberia apuntar al backend.
+- Actualmente hay URLs hardcodeadas a `http://localhost:3000` en el frontend; si cambias el puerto del backend, ajusta esas rutas o agrega rewrites.
+
 
 ### Carpeta de uploads
 
@@ -80,7 +95,7 @@ cd CommercyAPI
 npm start
 ```
 
-La API estará disponible en [http://localhost:3000](http://localhost:3000).
+La API estara disponible en [http://localhost:8000](http://localhost:8000) si usas el puerto recomendado.
 
 ### Frontend (Next.js)
 
@@ -92,6 +107,46 @@ npm run dev
 El frontend estará disponible en [http://localhost:3000](http://localhost:3000) o [http://localhost:3001](http://localhost:3001) según el puerto configurado.
 
 > **Nota:** Si ambos usan el mismo puerto, cambia el puerto de uno de ellos en el `.env` o configuración de Next.js.
+
+## Distribucion de la BBDD (MongoDB)
+
+La aplicacion usa MongoDB con las siguientes colecciones y campos minimos:
+
+### users
+
+- `name` (String)
+- `age` (Number)
+- `email` (String, unique)
+- `password` (String)
+- `ciudad` (String)
+- `intereses` ([String], default [])
+- `ofertas` (Boolean)
+- `role` ("user" | "admin", default "user")
+- `createdAt`, `updatedAt` (timestamps)
+
+### comercios
+
+- `nombre` (String)
+- `cif` (String, unique)
+- `direccion` (String)
+- `email` (String, unique)
+- `telefono` (String)
+- `id` (Number)
+- `createdAt`, `updatedAt` (timestamps)
+
+### webs
+
+- `ciudad` (String)
+- `actividad` (String)
+- `titulo` (String)
+- `resumen` (String)
+- `textos` ([String])
+- `imagenes` ([String])
+- `cifComercio` (String, referencia al `cif` de comercios)
+- `resenas` (Array de objetos: `scoring` Number 0-5, `puntuacion` Number, `texto` String)
+
+Nota: Los modelos `users` y `webs` usan soft delete (mongoose-delete) y agregan campos internos como `deleted` y `deletedAt`.
+
 
 ## Estructura del Proyecto
 
@@ -122,7 +177,7 @@ README.md
 
 La documentación interactiva de la API está disponible en:
 
-[http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+[http://localhost:8000/api-docs](http://localhost:8000/api-docs)
 
 ## Testing
 

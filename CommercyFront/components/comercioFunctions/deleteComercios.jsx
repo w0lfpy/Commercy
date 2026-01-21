@@ -17,7 +17,7 @@ export default function DeleteCommerce({ commerceData }) {
             }
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-            const response = await axios.delete(`http://localhost:3000/api/comercios/${commerceData.cif}`); 
+            const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/comercios/${commerceData.cif}`); 
             console.log("Commerce deleted:", response.data);
             if (response.data.error) {
                 setResponse(response.data.error);

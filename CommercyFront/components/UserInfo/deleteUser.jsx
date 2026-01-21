@@ -31,7 +31,7 @@ export default function DeleteUser({ setAuth }) {
             setEmail(emailUser);
 
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            const response = await axios.delete(`http://localhost:3000/api/user/deleteUser/${userId}`);
+            const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/user/deleteUser/${userId}`);
             setShowPopup(false);
 
             console.log('Delete successful:', response.data);

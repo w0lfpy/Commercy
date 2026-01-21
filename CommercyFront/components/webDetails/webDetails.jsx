@@ -40,7 +40,7 @@ export default function WebDetailsClient({ webData }) {
     };
 
     const handleAddReview = async () => {
-        const res = await fetch(`http://localhost:3000/api/web/${web._id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/web/${web._id}`);
         const updatedData = await res.json();
         setWeb(updatedData);
         setIsPopupOpen(false);
@@ -69,7 +69,7 @@ export default function WebDetailsClient({ webData }) {
 
                             <img
                                 className="max-w-md w-[600px] h-[300px] object-cover transition-transform duration-3000 ease transform rounded-[10px] z-20"
-                                src={'http://localhost:3000' + web.imagenes[currentImageIndex]}
+                                src={`${process.env.NEXT_PUBLIC_API_URL}` + web.imagenes[currentImageIndex]}
                                 alt=""
                             />
 

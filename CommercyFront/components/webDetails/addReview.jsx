@@ -27,7 +27,7 @@ export default function AddReview({ webId, onReviewAdded }) {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `http://localhost:3000/api/user/writeReview/${webId}`, // Asume que la API está configurada para manejar esta ruta en Next.js
+        `${process.env.NEXT_PUBLIC_API_URL}/api/user/writeReview/${webId}`, // Asume que la API está configurada para manejar esta ruta en Next.js
         review,
         {
           headers: {

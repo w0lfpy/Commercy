@@ -26,7 +26,7 @@ export default function CreateCommerce() {
             }
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-            const response = await axios.post("http://localhost:3000/api/comercios", values); 
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/comercios`, values); 
             setCommerceToken(response.data.token);
             console.log(response.data.comercio);
 
